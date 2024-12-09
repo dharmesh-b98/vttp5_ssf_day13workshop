@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.*;
+import vttp5_ssf_day13workshop.vttp5_ssf_day13workshop.customvalidator.AgeLimit;
 
 public class Person {
 
@@ -17,14 +18,15 @@ public class Person {
     private String email;
 
     @NotNull(message = "Required")
-    @Min(value=0000000,  message = "Needs to be 6 digits")
+    @Min(value=100000,  message = "Needs to be 6 digits")
     @Max(value=999999, message = "Needs to be 6 digits")
     private Integer phoneNumber;
 
+    @AgeLimit(minimumAge = 10, maximumAge = 100, message = "Age has to be between 10 and 100 years old") //CUSTOM VALIDATOR
     @NotNull(message = "Required")
     @Past(message= "Needs to be past date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")  //IMPORTANT this has to be this way or there will be problems with getting date info from form
-    private Date DateOfBirth;
+    private Date dateOfBirth;
 
     public Person(){
     }
@@ -33,7 +35,7 @@ public class Person {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.DateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getName() {
@@ -61,11 +63,11 @@ public class Person {
     }
 
     public Date getDateOfBirth() {
-        return DateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
-        this.DateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
     
